@@ -1,0 +1,67 @@
+﻿@page
+@model UI.Pages.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container">
+    <h2>Welcome to the Dashboard</h2>
+
+    @if (Model.IsCustomer)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Customer Dashboard</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Username:</strong> @Model.User?.Username</p>
+                <p><strong>Name:</strong> @Model.User?.Name</p>
+                <p><strong>Email:</strong> @Model.User?.Email</p>
+                <p><strong>Mobile:</strong> @Model.User?.Mobile</p>
+            </div>
+        </div>
+    }
+    else if (Model.IsAdmin)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Admin Dashboard</h3>
+            </div>
+            <div class="card-body">
+                <h3>All Users:</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.Users)
+                        {
+                            <tr>
+                                <td>@user.Username</td>
+                                <td>@user.Name</td>
+                                <td>@user.Email</td>
+                                <td>@user.Mobile</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Dashboard</h3>
+            </div>
+            <div class="card-body">
+                <!-- Display default information for other user roles -->
+            </div>
+        </div>
+    }
+</div>
